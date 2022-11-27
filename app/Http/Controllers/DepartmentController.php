@@ -14,17 +14,12 @@ class DepartmentController extends Controller
      */
     public function index()
     {
-        //
-    }
+        $departments = Department::where('status', Department::Active)->get();
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return response()->json([
+            'code' => 200,
+            'data' => $departments
+        ], 200);
     }
 
     /**
@@ -46,20 +41,12 @@ class DepartmentController extends Controller
      */
     public function show(Department $department)
     {
-        //
+        return response()->json([
+            'code' => 200,
+            'data' => $department
+        ], 200);
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Department  $department
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Department $department)
-    {
-        //
-    }
-
+    
     /**
      * Update the specified resource in storage.
      *

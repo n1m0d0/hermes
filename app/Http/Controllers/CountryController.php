@@ -14,7 +14,12 @@ class CountryController extends Controller
      */
     public function index()
     {
-        //
+        $countries = Country::where('status', Country::Active)->get();
+
+        return response()->json([
+            'code' => 200,
+            'data' => $countries
+        ], 200);
     }
 
     /**
@@ -28,17 +33,6 @@ class CountryController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
      *
      * @param  \App\Models\Country  $country
@@ -46,18 +40,10 @@ class CountryController extends Controller
      */
     public function show(Country $country)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Country  $country
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Country $country)
-    {
-        //
+        return response()->json([
+            'code' => 200,
+            'data' => $country
+        ], 200);
     }
 
     /**

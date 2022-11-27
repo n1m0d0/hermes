@@ -17,13 +17,14 @@ return new class extends Migration
         Schema::create('clients', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('country_id');
             $table->string('name');
             $table->string('lastname');
             $table->string('identification_card');
             $table->string('phone');
             $table->string('address');
             $table->integer('strike')->default(0);
-            $table->double('score');
+            $table->double('score')->default(0);
             $table->enum('status', [
                 Client::Active,
                 Client::Inactive
@@ -31,6 +32,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('country_id')->references('id')->on('countries');
         });
     }
 

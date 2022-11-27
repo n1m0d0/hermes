@@ -23,14 +23,14 @@ return new class extends Migration
                 Service::Shipping,
                 Service::Order
             ]);
+            $table->string('description');
+            $table->mediumText('photo');
             $table->enum('status', [
                 Service::Active,
                 Service::Inactive,
                 Service::Processing,
                 Service::Finalized
             ])->default(Service::Active);
-            $table->string('discription');
-            $table->string('photo');
             $table->timestamps();
 
             $table->foreign('client_id')->references('id')->on('clients');

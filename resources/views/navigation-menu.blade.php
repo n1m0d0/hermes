@@ -15,6 +15,21 @@
                     <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('page.user') }}" :active="request()->routeIs('page.user')">
+                        {{ __('User') }}
+                    </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('page.airline') }}" :active="request()->routeIs('page.airline')">
+                        {{ __('Airline') }}
+                    </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('page.country') }}" :active="request()->routeIs('page.country')">
+                        {{ __('Country') }}
+                    </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('page.department') }}" :active="request()->routeIs('page.department')">
+                        {{ __('Department') }}
+                    </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('page.city') }}" :active="request()->routeIs('page.city')">
+                        {{ __('City') }}
+                    </x-jet-nav-link>
                 </div>
             </div>
 
@@ -139,6 +154,21 @@
         <div class="pt-2 pb-3 space-y-1">
             <x-jet-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
+            </x-jet-responsive-nav-link>
+            <x-jet-responsive-nav-link href="{{ route('page.user') }}" :active="request()->routeIs('page.user')">
+                {{ __('User') }}
+            </x-jet-responsive-nav-link>
+            <x-jet-responsive-nav-link href="{{ route('page.airline') }}" :active="request()->routeIs('page.airline')">
+                {{ __('Airline') }}
+            </x-jet-responsive-nav-link>
+            <x-jet-responsive-nav-link href="{{ route('page.country') }}" :active="request()->routeIs('page.country')">
+                {{ __('Country') }}
+            </x-jet-responsive-nav-link>
+            <x-jet-responsive-nav-link href="{{ route('page.department') }}" :active="request()->routeIs('page.department')">
+                {{ __('Department') }}
+            </x-jet-responsive-nav-link>
+            <x-jet-responsive-nav-link href="{{ route('page.city') }}" :active="request()->routeIs('page.city')">
+                {{ __('City') }}
             </x-jet-responsive-nav-link>
         </div>
 

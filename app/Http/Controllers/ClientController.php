@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Client;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreClient;
+use App\Http\Resources\ClientCollection;
+use App\Http\Resources\ClientResource;
 
 class ClientController extends Controller
 {
@@ -14,17 +18,9 @@ class ClientController extends Controller
      */
     public function index()
     {
-        //
-    }
+        $clients = Client::where('status', Client::Active)->get();
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return ClientCollection::make($clients);
     }
 
     /**
@@ -33,9 +29,27 @@ class ClientController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreClient $request)
     {
-        //
+        $user = new User();
+        $user->name = $request->name . " " . $request->lastname;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password);
+        $user->save();
+
+        $user->assignRole('client');
+
+        $client = new Client();
+        $client->user_id = $user->id;
+        $client->country_id = $request->country_id;
+        $client->name = $request->name;
+        $client->lastname = $request->lastname;
+        $client->identification_card = $request->identification_card;
+        $client->phone = $request->phone;
+        $client->address = $request->address;
+        $client->save();
+
+        return ClientResource::make($client);
     }
 
     /**
@@ -46,18 +60,7 @@ class ClientController extends Controller
      */
     public function show(Client $client)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Client  $client
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Client $client)
-    {
-        //
+        return ClientResource::make($client);
     }
 
     /**

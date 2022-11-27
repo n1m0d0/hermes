@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,4 +26,12 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+});
+
+Route::controller(PageController::class)->group(function () {
+    Route::get('user', 'user')->name('page.user')->middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']);
+    Route::get('airline', 'airline')->name('page.airline')->middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']);
+    Route::get('country', 'country')->name('page.country')->middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']);    
+    Route::get('department', 'department')->name('page.department')->middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']);
+    Route::get('city', 'city')->name('page.city')->middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']);
 });

@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreService;
+use App\Http\Resources\ServiceCollection;
+use App\Http\Resources\ServiceResource;
 use App\Models\Service;
 use Illuminate\Http\Request;
 
@@ -14,28 +17,31 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        //
-    }
+        $services = Service::where('status', Service::Active)->get();
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return ServiceCollection::make($services);
     }
-
+    
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreService $request)
     {
-        //
+        $service = new Service();
+        $service->client_id = $request->client_id;
+        $service->city_id = $request->city_id;
+        $service->destiny_id = $request->destiny_id;
+        $service->type = $request->type;
+        $service->description = $request->description;
+        $service->photo = $request->photo;
+        $service->status = Service::Active;
+        $service->save();
+
+        return ServiceResource::make($service);
+
     }
 
     /**
@@ -46,20 +52,9 @@ class ServiceController extends Controller
      */
     public function show(Service $service)
     {
-        //
+        return ServiceResource::make($service);
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Service  $service
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Service $service)
-    {
-        //
-    }
-
+    
     /**
      * Update the specified resource in storage.
      *
